@@ -1,11 +1,11 @@
 <script setup lang="ts">
   const supabase = useSupabaseClient();
-
+  const runtimeConfig = useRuntimeConfig();
   const signInWithGoogle = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: "http://localhost:3000/confirm",
+        redirectTo: `${runtimeConfig.public.redirectHost}/confirm`,
       },
     });
     if (error) console.log(error);
